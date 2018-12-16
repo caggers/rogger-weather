@@ -1,16 +1,21 @@
-import React from 'react';
-import { styled } from '@material-ui/styles';
+import React from 'react'
+import styled from 'styled-components'
+import AnimatedBG from './AnimatedBG'
 
-const HeaderDiv = styled('div')({
-  background: 'linear-gradient(180deg, rgba(44,56,126,1) 0%, rgba(255,145,0,1) 100%)',
-  height: '100vh',
-  border: 'none',
-  color: 'white'
-});
+const HeaderDiv = styled.div`
+  background: linear-gradient(180deg, rgba(44,56,126,1) 0%, rgba(255,145,0,1) 100%);
+  height: 100vh;
+  border: none;
+  color: white;
+`
 
-export default function Header() {
+const Header = () => {
   return (
-    <HeaderDiv>
-      {/* <h1>Rogger's ScheeCast</h1> */}
-    </HeaderDiv>);
+    <div>
+      <AnimatedBG speed="15s" height="500px"/>
+      {/* <HeaderDiv /> */}
+    </div>
+  )
 }
+
+export default Header;

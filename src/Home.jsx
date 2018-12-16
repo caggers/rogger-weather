@@ -1,78 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
-
-import Button from '@material-ui/core/Button'
+import { Button, Grid } from 'semantic-ui-react'
 import Header from './Global/Header'
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  },
-  grid: {
-    textAlign: 'center'
-  },
-  gridItem: {
-    alignItems: 'center',
-    textAlign: 'center'
+class Home extends React.Component {
+  render() {
+    const { setActiveTable } = this.props
+    return (
+      <div>
+        <Header />
+        <Button primary value="snowReport" onClick={(e) => {setActiveTable(e)}}>
+          Snow Report
+        </Button>
+        <Button secondary value="resortForecast" onClick={(e) => {setActiveTable(e)}}>
+          Resort Forecast
+        </Button>
+      </div>
+    )
   }
-})
-
-function CenteredGrid(props) {
-  const { classes } = props
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={24} alignItems="center" justify="center">
-        <Grid item xs={12}>
-          <Header />
-        </Grid>
-        <Grid item xs={6} className={classes.gridItem}>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            value="snowReport"
-            onClick={props.setActiveTable}
-          >
-            Snow Report
-          </Button>
-        </Grid>
-        <Grid item xs={6} className={classes.gridItem}>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            value="resortForecast"
-            onClick={props.setActiveTable}
-          >
-            Resort Forecast
-          </Button>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  )
 }
 
-CenteredGrid.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(CenteredGrid)
+export default Home;
