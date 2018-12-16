@@ -1,23 +1,37 @@
 import React, { Component } from 'react'
-import './App.css'
-
 import { getData } from './util'
-import Home from './Home'
+import Home from './Components/Home'
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      activeTable: null,
+      snowReport: null,
+      resortForecast: null
+    }
+  }
 
   setData = async () => {
-    const snowReport = await getData('snowreport')
-    const resortForecast = await getData('resortforecast')
+    const snowReport = await getData('snowreport', 222036)
+    const resortForecast = await getData('resortforecast', 222036)
+
+    const snowReports = {
+      Westendorf: await getData('snowreport', 222036).then(req => req.data),
+      Kitzbuhl: await getData('snowreport', 222013).then(req => req.data),
+      Emlau: await getData('snowreport', 222023).then(req => req.data),
+      Saalbach: await getData('snowreport', 222018).then(req => req.data)
+    }
     this.setState({
       snowReport,
-      resortForecast
+      resortForecast,
+      snowReports
     })
   }
 
-  setActiveTable = (e) => {
+  setActiveTable = e => {
     const value = e.target.value
-    this.setState({activeTable: value})
+    this.setState({ activeTable: value })
   }
 
   componentDidMount() {
@@ -25,10 +39,16 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { activeTable, snowReport, resortForecast, snowReports } = this.state
     return (
       <div>
-        <Home setActiveTable={this.setActiveTable}/>
+        <Home
+          setActiveTable={this.setActiveTable}
+          activeTable={activeTable}
+          snowReport={snowReport}
+          resortForecast={resortForecast}
+          snowReports={snowReports}
+        />
       </div>
     )
   }
