@@ -14,8 +14,9 @@ class Home extends React.Component {
       setActiveTable,
       activeTable,
       snowReport,
-      resortReport,
-      snowReports
+      snowReports,
+      handleSelectResort,
+      selectedResort
     } = this.props
     return (
       <div>
@@ -50,8 +51,9 @@ class Home extends React.Component {
               <DataTable
                 activeTable={activeTable}
                 snowReport={snowReport}
-                resortReport={resortReport}
                 snowReports={snowReports}
+                handleSelectResort={handleSelectResort}
+                selectedResort={selectedResort}
               />
               <Grid.Row divided />
             </Grid>
