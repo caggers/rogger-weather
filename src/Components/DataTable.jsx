@@ -23,7 +23,7 @@ class DataTable extends Component {
 
   render() {
     const { activeTable, selectedResort} = this.props
-    const { snowReports,  } = this.state
+    const { snowReports  } = this.state
     return (
       <div>
         {activeTable && activeTable === 'snowReport' && (

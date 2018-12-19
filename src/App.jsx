@@ -12,10 +12,10 @@ export default class App extends Component {
 
   setData = async () => {
     const snowReports = {
-      Westendorf: await getData('snowreport', 222036).then(req => req.data),
-      Kitzbuhl: await getData('snowreport', 222013).then(req => req.data),
-      Emlau: await getData('snowreport', 222023).then(req => req.data),
-      Saalbach: await getData('snowreport', 222018).then(req => req.data)
+      // Westendorf: await getData('snowreport', 222036).then(req => req.data),
+      // Kitzbuhl: await getData('snowreport', 222013).then(req => req.data),
+      // Emlau: await getData('snowreport', 222023).then(req => req.data),
+      // Saalbach: await getData('snowreport', 222018).then(req => req.data)
     }
 
     const resortForecasts = {

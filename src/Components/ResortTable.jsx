@@ -21,7 +21,7 @@ class ResortTable extends Component {
   }
 
   render() {
-    // console.log(this.props);
+
     const {selectedResort} = this.props
     
     return (<div>hello</div>)
