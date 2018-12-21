@@ -3,22 +3,40 @@ import { Button, Grid, Container } from 'semantic-ui-react'
 import styled from 'styled-components'
 import Header from '../Global/Header'
 import DataTable from './DataTable'
+import { getForecast, OPTIONS } from '../util'
 
 const StyledContainer = styled.div`
   padding-top: 50px;
 `
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedResort: {}
+    }
+  }
+
+  handleSelectResort = async (value) => {
+    const option = OPTIONS.filter(item => {
+      return item.value === value ? item : null
+    })
+
+
+    const id = option[0].id
+
+    const resortForecast = await getForecast(id, 1).then(req => req.data)
+
+    this.setState({ resortForecast })
+  }
+
   render() {
-    const {
-      setActiveTable,
-      activeTable,
-      snowReport,
-      snowReports,
-      handleSelectResort,
-      selectedResort
-    } = this.props
+    const { setActiveTable, activeTable, snowReports } = this.props
+
+    const { resortForecast } = this.state
+  
     return (
+      
       <div>
         <Header />
         <StyledContainer>
@@ -50,10 +68,9 @@ class Home extends React.Component {
               </Grid.Row>
               <DataTable
                 activeTable={activeTable}
-                snowReport={snowReport}
                 snowReports={snowReports}
-                handleSelectResort={handleSelectResort}
-                selectedResort={selectedResort}
+                handleSelectResort={this.handleSelectResort}
+                resortForecast={resortForecast}
               />
               <Grid.Row divided />
             </Grid>

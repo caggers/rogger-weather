@@ -9,7 +9,6 @@ class ResortTable extends Component {
       column: null,
       direction: null,
       data: this.props.data,
-      forecast: this.props.data.forecast
     }
   }
 
@@ -17,18 +16,18 @@ class ResortTable extends Component {
     if (nextProps.data !== this.props.data) {
       this.setState({
         data: nextProps.data,
-        forecast: nextProps.data.forecast
       })
     }
+    console.log(this.state)
   }
 
   handleSort = clickedColumn => () => {
-    const { column, forecast, direction } = this.state
+    const { column, data, direction } = this.state
 
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,
-        forecast: _.sortBy(forecast, [clickedColumn]),
+        data: _.sortBy(data, [clickedColumn]),
         direction: 'ascending'
       })
 
@@ -36,65 +35,66 @@ class ResortTable extends Component {
     }
 
     this.setState({
-      forecast: forecast.reverse(),
+      forecast: data.reverse(),
       direction: direction === 'ascending' ? 'descending' : 'ascending'
     })
   }
 
   render() {
-    const { column, forecast, direction } = this.state
-    const { resortName, forecastDate } = this.props
+    
+    const { column, data, direction } = this.state
     return (
       <div>
         <Table sortable celled fixed>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="6">{resortName} Forecast for {forecastDate} </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Header>
-            <Table.Row>
               <Table.HeaderCell
-                sorted={column === 'time' ? direction : null}
-                onClick={this.handleSort('time')}
+                sorted={column === 'temp_c' ? direction : null}
+                onClick={this.handleSort('temp_c')}
               >
-                Time
+                Temp °C
               </Table.HeaderCell>
               <Table.HeaderCell
-                sorted={column === 'frzglvl_m' ? direction : null}
-                onClick={this.handleSort('frzglvl_m')}
+                sorted={column === 'feelslike_c' ? direction : null}
+                onClick={this.handleSort('feelslike_c')}
               >
-                Freezing Level (m)
+                Feels Like
               </Table.HeaderCell>
               <Table.HeaderCell
-                sorted={column === 'rain_mm' ? direction : null}
-                onClick={this.handleSort('newsnow_cm')}
+                sorted={column === 'freshsnow_cm' ? direction : null}
+                onClick={this.handleSort('freshsnow_cm')}
               >
-                Rain (mm)
+                Fresh Snow (cm)
               </Table.HeaderCell>
               <Table.HeaderCell
-                sorted={column === 'snow_mm' ? direction : null}
-                onClick={this.handleSort('snow_mm')}
+                sorted={column === 'winddir_compass' ? direction : null}
+                onClick={this.handleSort('winddir_compass')}
               >
-                Snow (mm)
+                Wind Direction
               </Table.HeaderCell>
               <Table.HeaderCell
-                sorted={column === 'totalcloud_pct' ? direction : null}
-                onClick={this.handleSort('totalcloud_pct')}
+                sorted={column === 'windspd_kts' ? direction : null}
+                onClick={this.handleSort('windspd_kts')}
               >
-                Total Cloud Cover
+                Wind Speed (knots)
               </Table.HeaderCell>
               <Table.HeaderCell
-                sorted={column === 'vis_km' ? direction : null}
-                onClick={this.handleSort('vis_km')}
+                sorted={column === 'windgst_kts' ? direction : null}
+                onClick={this.handleSort('windgst_kts')}
               >
-                Visibility (km)
+                Wind Gust (knots)
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                sorted={column === 'wx_desc' ? direction : null}
+                onClick={this.handleSort('wx_desc')}
+              >
+                Weather Desc.
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {_.map(
-              forecast,
+              data,
               (
                 { time, frzglvl_m, rain_mm, snow_mm, totalcloud_pct, vis_km },
                 i

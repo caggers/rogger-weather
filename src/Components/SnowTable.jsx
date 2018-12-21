@@ -33,6 +33,7 @@ class SnowTable extends Component {
 
   render() {
     const { column, data, direction } = this.state
+    console.log(data)
     return (
       <div>
         <Table sortable celled fixed>
@@ -54,7 +55,7 @@ class SnowTable extends Component {
                 sorted={column === 'newsnow_cm' ? direction : null}
                 onClick={this.handleSort('newsnow_cm')}
               >
-                New Snow
+                New Snow (cm)
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'lastsnow' ? direction : null}
@@ -107,12 +108,12 @@ class SnowTable extends Component {
                 <Table.Row key={i}>
                   <Table.Cell>{resortname}</Table.Cell>
                   <Table.Cell>{conditions}</Table.Cell>
-                  <Table.Cell>{newsnow_cm}</Table.Cell>
+                  <Table.Cell>{newsnow_cm} cm</Table.Cell>
                   <Table.Cell>{lastsnow}</Table.Cell>
-                  <Table.Cell>{uppersnow_cm}</Table.Cell>
-                  <Table.Cell>{lowersnow_cm}</Table.Cell>
+                  <Table.Cell>{uppersnow_cm} cm</Table.Cell>
+                  <Table.Cell>{lowersnow_cm} cm</Table.Cell>
                   <Table.Cell>{reporttime}</Table.Cell>
-                  <Table.Cell>{pctopen}</Table.Cell>
+                  <Table.Cell>{pctopen} %</Table.Cell>
                 </Table.Row>
               )
             )}

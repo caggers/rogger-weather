@@ -1,18 +1,17 @@
 import axios from 'axios'
 
 const API = 'http://api.weatherunlocked.com/api'
-// const SNOW_API = 'api/snowreport/{resort_id}?app_id={APP_ID}&app_key={APP_KE'
-const APP_ID = '6f661e4d'
-const APP_KEY = '42b3357840783f5430f920578ca89d05'
+const APP_ID = process.env.REACT_APP_WEATHER_APP_CODE
+const APP_KEY = process.env.REACT_APP_WEATHER_API_KEY
 
 const HEADERS = {
-  'Accept': 'application/json'
+  Accept: 'application/json'
 }
 
 export function getData(type, resort_id) {
   const URL = `${API}/${type}/${resort_id}?`
   return axios.get(URL, {
-    headers: HEADERS, 
+    headers: HEADERS,
     params: {
       app_id: APP_ID,
       app_key: APP_KEY
@@ -27,7 +26,7 @@ export function getForecast(resort_id, num_days, interval) {
     params: {
       num_of_days: num_days,
       app_id: APP_ID,
-      app_key: APP_KEY,
+      app_key: APP_KEY
     }
   })
 }
@@ -35,21 +34,51 @@ export function getForecast(resort_id, num_days, interval) {
 export const OPTIONS = [
   {
     text: 'Westendorf',
-    value: 'Westendorf'
+    value: 'Westendorf',
+    id: 222036
   },
   {
     text: 'Kitzbuhl',
-    value: 'Kitzbuhl'
-  },{
+    value: 'Kitzbuhl',
+    id: 222013
+  },
+  {
     text: 'Ellmau',
-    value: 'Ellmau'
+    value: 'Ellmau',
+    id: 222023
   },
   {
     text: 'Jochberg',
-    value: 'Jochberg'
+    value: 'Jochberg',
+    id: 222018
   },
   {
     text: 'Saalbach',
-    value: 'Saalbach'
+    value: 'Saalbach',
+    id: 54884231
   }
 ]
+
+export function getResortForecastToday(place) {
+  return getForecast(place, 1, 6).then(req => req.data)
+}
+
+export function getDate() {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ]
+
+  const newDate = new Date()
+  const date = newDate.getDate()
+  const month = newDate.getMonth()
+  const year = newDate.getFullYear()
+  const today = days[newDate.getDay()]
+  const utcDay = newDate.getUTCDate()
+  return `${today} ${date}/${month}/${year}`
+}
