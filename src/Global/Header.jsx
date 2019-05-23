@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <div>
       <AnimatedBG speed="20s" height="175px">
-      <Title>Rogger's ScheeCast 2018-2019</Title>
+      <Title>Rogger's SchneeCast 2018-2019</Title>
       <SubTitle>- a great piece of kit!</SubTitle>
       </AnimatedBG>
     </div>

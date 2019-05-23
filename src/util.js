@@ -79,6 +79,13 @@ export function getDate() {
   const month = newDate.getMonth()
   const year = newDate.getFullYear()
   const today = days[newDate.getDay()]
-  const utcDay = newDate.getUTCDate()
   return `${today} ${date}/${month}/${year}`
+}
+
+export function getLevel(data, level) {
+  let arr = [];
+  data.forecast.forEach(item => {
+    arr.push(item[level])
+  })
+  return arr
 }

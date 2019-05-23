@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getData, getForecast } from './util'
+import { getData } from './util'
 import Home from './Components/Home'
 
 export default class App extends Component {
@@ -8,6 +8,7 @@ export default class App extends Component {
     this.state = {
       activeTable: null
     }
+    this.setData()
   }
 
   setData = async () => {
@@ -26,10 +27,6 @@ export default class App extends Component {
   setActiveTable = e => {
     const value = e.target.value
     this.setState({ activeTable: value })
-  }
-
-  componentDidMount() {
-    this.setData()
   }
 
   render() {

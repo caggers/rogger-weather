@@ -18,7 +18,6 @@ class ResortTable extends Component {
         data: nextProps.data,
       })
     }
-    console.log(this.state)
   }
 
   handleSort = clickedColumn => () => {
@@ -41,11 +40,16 @@ class ResortTable extends Component {
   }
 
   render() {
-    
     const { column, data, direction } = this.state
+    const { name } = this.props
     return (
       <div>
         <Table sortable celled fixed>
+        <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan="7">{name}</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell
@@ -96,16 +100,17 @@ class ResortTable extends Component {
             {_.map(
               data,
               (
-                { time, frzglvl_m, rain_mm, snow_mm, totalcloud_pct, vis_km },
+                { temp_c, feelslike_c, freshsnow_cm, winddir_compass, windspd_kts, windgst_kts, wx_desc },
                 i
               ) => (
                 <Table.Row key={i}>
-                  <Table.Cell>{time}</Table.Cell>
-                  <Table.Cell>{frzglvl_m} m</Table.Cell>
-                  <Table.Cell>{rain_mm} mm</Table.Cell>
-                  <Table.Cell>{snow_mm} mm</Table.Cell>
-                  <Table.Cell>{totalcloud_pct} %</Table.Cell>
-                  <Table.Cell>{vis_km} km</Table.Cell>
+                  <Table.Cell>{temp_c} °C</Table.Cell>
+                  <Table.Cell>{feelslike_c} °C</Table.Cell>
+                  <Table.Cell>{freshsnow_cm} cm</Table.Cell>
+                  <Table.Cell>{winddir_compass}</Table.Cell>
+                  <Table.Cell>{windspd_kts}</Table.Cell>
+                  <Table.Cell>{windgst_kts}</Table.Cell>
+                  <Table.Cell>{wx_desc}</Table.Cell>
                 </Table.Row>
               )
             )}

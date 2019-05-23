@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Divider } from 'semantic-ui-react'
 import { OPTIONS, getDate } from '../util'
 
 import SnowTable from './SnowTable'
@@ -10,17 +10,20 @@ class DataTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      snowReports: undefined,
-      resortForecast: undefined
+      
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { snowReports } = nextProps
+    const { snowReports, resortForecast } = nextProps
 
     if (snowReports !== this.props.snowReports) {
       const snowArray = Object.values(snowReports)
       this.setState({ snowReports: snowArray })
+    }
+
+    if(resortForecast !== this.props.resortForecast) {
+      this.setState({resortForecast})
     }
   }
 
@@ -31,10 +34,12 @@ class DataTable extends Component {
     const forecastDate = getDate()
 
     this.setState({ resortSelected: true, resortName, forecastDate })
+    
   }
 
   render() {
-    const { activeTable, resortForecast } = this.props
+
+    const { activeTable, resortForecast, base, mid, upper } = this.props
     const { snowReports, resortName, forecastDate } = this.state
     return (
       <div>
@@ -50,6 +55,7 @@ class DataTable extends Component {
               selection
               onChange={(e, val) => this.handleSelectResort(e, val)}
             />
+            <Divider horizontal />
           </div>
         )}
 
@@ -61,7 +67,13 @@ class DataTable extends Component {
               forecastDate={forecastDate}
               showUpperTable={e => this.showUpperTable(e)}
             />
-            <BaseTable data={resortForecast} />
+            <Divider horizontal />
+            <BaseTable data={base} name="Bottom of the Mountain"/>
+            <Divider horizontal />
+            <BaseTable data={mid} name="Middle Station"/>
+            <Divider horizontal />
+            <BaseTable data={upper} name="Top of the Mountain"/>
+            <Divider horizontal />
           </div>
         )}
       </div>

@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import _ from 'lodash'
 import { Table } from 'semantic-ui-react'
 
+const SubTitle = styled.h2`
+  text-align: center;
+  font-size: 2.5em;
+  color: #3f51b5;
+`
 class SnowTable extends Component {
   constructor(props) {
     super(props)
@@ -119,6 +125,7 @@ class SnowTable extends Component {
             )}
           </Table.Body>
         </Table>
+        <SubTitle>We're sucking diesel now!</SubTitle>
       </div>
     )
   }
