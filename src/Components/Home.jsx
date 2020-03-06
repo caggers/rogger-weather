@@ -52,7 +52,7 @@ class Home extends React.Component {
               <Grid.Row>
                 <Grid.Column width={8} textAlign="center">
                   <Button
-                    primary
+                    color="blue"
                     value="snowReport"
                     onClick={e => {
                       setActiveTable(e)
@@ -63,7 +63,7 @@ class Home extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={8} textAlign="center">
                   <Button
-                    secondary
+                    color="orange"
                     value="resortForecast"
                     onClick={e => {
                       setActiveTable(e)
