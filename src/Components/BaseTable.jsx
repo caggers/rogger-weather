@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
+
 import { Table } from 'semantic-ui-react'
+import _ from 'lodash'
 
 class ResortTable extends Component {
   constructor(props) {
@@ -8,19 +9,19 @@ class ResortTable extends Component {
     this.state = {
       column: null,
       direction: null,
-      data: this.props.data,
+      data: this.props.data
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.data !== this.props.data) {
       this.setState({
-        data: nextProps.data,
+        data: nextProps.data
       })
     }
   }
 
-  handleSort = clickedColumn => () => {
+  handleSort = clickedColumn => {
     const { column, data, direction } = this.state
 
     if (column !== clickedColumn) {
@@ -45,7 +46,7 @@ class ResortTable extends Component {
     return (
       <div>
         <Table sortable celled fixed>
-        <Table.Header>
+          <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan="7">{name}</Table.HeaderCell>
             </Table.Row>
@@ -54,43 +55,43 @@ class ResortTable extends Component {
             <Table.Row>
               <Table.HeaderCell
                 sorted={column === 'temp_c' ? direction : null}
-                onClick={this.handleSort('temp_c')}
+                onClick={() => this.handleSort('temp_c')}
               >
                 Temp °C
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'feelslike_c' ? direction : null}
-                onClick={this.handleSort('feelslike_c')}
+                onClick={() => this.handleSort('feelslike_c')}
               >
                 Feels Like
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'freshsnow_cm' ? direction : null}
-                onClick={this.handleSort('freshsnow_cm')}
+                onClick={() => this.handleSort('freshsnow_cm')}
               >
                 Fresh Snow (cm)
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'winddir_compass' ? direction : null}
-                onClick={this.handleSort('winddir_compass')}
+                onClick={() => this.handleSort('winddir_compass')}
               >
                 Wind Direction
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'windspd_kts' ? direction : null}
-                onClick={this.handleSort('windspd_kts')}
+                onClick={() => this.handleSort('windspd_kts')}
               >
                 Wind Speed (knots)
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'windgst_kts' ? direction : null}
-                onClick={this.handleSort('windgst_kts')}
+                onClick={() => this.handleSort('windgst_kts')}
               >
                 Wind Gust (knots)
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === 'wx_desc' ? direction : null}
-                onClick={this.handleSort('wx_desc')}
+                onClick={() => this.handleSort('wx_desc')}
               >
                 Weather Desc.
               </Table.HeaderCell>
@@ -100,7 +101,15 @@ class ResortTable extends Component {
             {_.map(
               data,
               (
-                { temp_c, feelslike_c, freshsnow_cm, winddir_compass, windspd_kts, windgst_kts, wx_desc },
+                {
+                  temp_c,
+                  feelslike_c,
+                  freshsnow_cm,
+                  winddir_compass,
+                  windspd_kts,
+                  windgst_kts,
+                  wx_desc
+                },
                 i
               ) => (
                 <Table.Row key={i}>

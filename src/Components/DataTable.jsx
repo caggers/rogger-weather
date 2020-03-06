@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
-import { Dropdown, Divider } from 'semantic-ui-react'
+import { Divider, Dropdown } from 'semantic-ui-react'
 import { OPTIONS, getDate } from '../util'
+import React, { Component } from 'react'
 
-import SnowTable from './SnowTable'
-import ResortTable from './ResortTable'
 import BaseTable from './BaseTable'
+import ResortTable from './ResortTable'
+import SnowTable from './SnowTable'
 
 class DataTable extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      
-    }
+    this.state = {}
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,8 +20,8 @@ class DataTable extends Component {
       this.setState({ snowReports: snowArray })
     }
 
-    if(resortForecast !== this.props.resortForecast) {
-      this.setState({resortForecast})
+    if (resortForecast !== this.props.resortForecast) {
+      this.setState({ resortForecast })
     }
   }
 
@@ -34,11 +32,9 @@ class DataTable extends Component {
     const forecastDate = getDate()
 
     this.setState({ resortSelected: true, resortName, forecastDate })
-    
   }
 
   render() {
-
     const { activeTable, resortForecast, base, mid, upper } = this.props
     const { snowReports, resortName, forecastDate } = this.state
     return (
@@ -68,11 +64,11 @@ class DataTable extends Component {
               showUpperTable={e => this.showUpperTable(e)}
             />
             <Divider horizontal />
-            <BaseTable data={base} name="Bottom of the Mountain"/>
+            <BaseTable data={base} name="Bottom of the Mountain" />
             <Divider horizontal />
-            <BaseTable data={mid} name="Middle Station"/>
+            <BaseTable data={mid} name="Middle Station" />
             <Divider horizontal />
-            <BaseTable data={upper} name="Top of the Mountain"/>
+            <BaseTable data={upper} name="Top of the Mountain" />
             <Divider horizontal />
           </div>
         )}

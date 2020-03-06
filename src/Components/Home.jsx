@@ -1,9 +1,10 @@
-import React from 'react'
-import { Button, Grid, Container } from 'semantic-ui-react'
-import styled from 'styled-components'
-import Header from '../Global/Header'
+import { Button, Container, Grid } from 'semantic-ui-react'
+import { OPTIONS, getForecast, getLevel } from '../util'
+
 import DataTable from './DataTable'
-import { getForecast, OPTIONS, getLevel } from '../util'
+import Header from '../Global/Header'
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledContainer = styled.div`
   padding-top: 50px;
@@ -23,18 +24,17 @@ class Home extends React.Component {
     })
 
     const id = option[0].id
-    const resortForecast = await getForecast(id, 1)
-      .then(req => req.data)
-    
+    const resortForecast = await getForecast(id, 1).then(req => req.data)
+
     this.getLevels(resortForecast)
 
     this.setState({ resortForecast })
   }
 
   getLevels(data) {
-    const base = getLevel(data, 'base');
-    const mid = getLevel(data, 'mid');
-    const upper = getLevel(data, 'upper');
+    const base = getLevel(data, 'base')
+    const mid = getLevel(data, 'mid')
+    const upper = getLevel(data, 'upper')
     this.setState({ base, mid, upper })
   }
 
